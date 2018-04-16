@@ -61,26 +61,30 @@ Return
 }
 
 ;Broken :(
-Google2(){
-	local vInString, vLastName 
+	global searchtags
+	
+Google2(selectedText){
+	 
 	Gui googGui:Default
 
-	Gui, Add, Text,, Find:
-	Gui, Add, Text,, Replace:
-	Gui, Add, Edit, vInString ym  ; The ym option starts a new column of controls.
-	Gui, Add, Edit, vLastName
-	Gui, Add, Button, +Default, OK ; The label ButtonOK (if it exists) will be run when the button is pressed.
+	Gui, Add, Text,, Extra Tags:
+	Gui, Add, Edit, tbsearchtags, %searchtags% ; ym  ; , %searchtag% ym  ; The ym option starts a new column of controls.
+	Gui, Add, Text,, Selected text:
+	Gui, Add, Edit, tbselectedText, %selectedText%
+	;Gui, Add, Button, +Default, OK ; The label ButtonOK (if it exists) will be run when the button is pressed.
+	Gui, Add, Button, default, OK
+
 	Gui, Show,, Simple Input Example
 	return  ; End of auto-execute section. The script is idle until the user does something.
 
 	GoogGuiClose:
 	GoogGuiButtonOK:
 	Gui, Submit  ; Save the input from the user to each control's associated variable.
- 
+	searchtags = %tbsearchtags%
 	;wholeSelection := RegExReplace(clip(),FirstName, LastName)
 	;clip(wholeSelection)
 	
-	Run, http://www.google.com/search?q=%InString%
+	Run, http://www.google.com/search?q=%tbselectedText%
 
 	Gui, Destroy
 	return

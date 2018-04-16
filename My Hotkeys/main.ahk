@@ -7,6 +7,7 @@ SetScrollLockState, AlwaysOff
 #Include, selectionFuncs.ahk
 #Include, windowFuncs.ahk
 #Include, miscFuncs.ahk
+#Include, MoveResizeWindow.ahk
 
 RWin:: OptionsMenu()
 
@@ -26,7 +27,7 @@ RAlt::F13
 		\:: Delete
 		r:: findReplace()
 		g:: Google1()
-		+g:: Google2()
+		+g:: Google2(clip())
 		
 	CapsLock:: Capitalize()
 		":: SurroundSelection("""","""")
@@ -43,7 +44,7 @@ RAlt::F13
 	}
 
 
-~RButton:: dragMoveWindow()
+~LButton:: dragMoveWindow()
 
 #If MouseIsOver("ahk_class Shell_TrayWnd")
 WheelUp::Send {Volume_Up}
@@ -96,7 +97,7 @@ RETURN
 
 #IfWinActive ahk_class CabinetWClass ; for use in explorer.
 F12::openCMDinFolder()
-+F12:: Run, powershell -Command "Start-Process cmd -Verb RunAs" 
++F12:: Run, powershell -Command "Start-Process PowerShell  -Verb RunAs" 
 
 F1:: Clipboard := Explorer_GetSelected()
 #IfWinActive
@@ -128,3 +129,5 @@ CuteRun(c) {
     Return stdout
 }
 
+#IfWinActive Chrome
+#IfWinActive

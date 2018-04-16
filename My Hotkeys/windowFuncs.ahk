@@ -115,7 +115,7 @@ dragMoveWindow(){
 	return
 
 	EWD_WatchMouse:
-	GetKeyState, EWD_LButtonState, RButton, P
+	GetKeyState, EWD_LButtonState, LButton, P
 	if EWD_LButtonState = U  ; Button has been released, so drag is complete.
 	{
 		SetTimer, EWD_WatchMouse, Off
