@@ -41,6 +41,8 @@ cfolderpath:
     send, ^c    
     return
 cfilepath:
+    Clipboard := Explorer_GetSelected()
+    return
 gitinitrepo:
 gitaddcommitpushall:
 GitMenu:

@@ -8,6 +8,7 @@ SetScrollLockState, AlwaysOff
 #Include, windowFuncs.ahk
 #Include, miscFuncs.ahk
 #Include, MoveResizeWindow.ahk
+#Include, SynonymLookup.ahk
 
 RWin:: OptionsMenu()
 

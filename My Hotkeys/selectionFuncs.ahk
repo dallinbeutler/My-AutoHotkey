@@ -84,7 +84,7 @@ Google2(selectedText){
 	;wholeSelection := RegExReplace(clip(),FirstName, LastName)
 	;clip(wholeSelection)
 	
-	Run, http://www.google.com/search?q=%tbselectedText%
+	Run, http://www.google.com/search?q= %tbselectedText%%selectedText%
 
 	Gui, Destroy
 	return
