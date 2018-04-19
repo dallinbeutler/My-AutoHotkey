@@ -1,26 +1,71 @@
 ﻿SetNumlockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
+Run basicNavigation.ahk
 
 #Include, menu.ahk
 #Include, WinExplorerFuncs.ahk
 #Include, selectionFuncs.ahk
 #Include, windowFuncs.ahk
 #Include, miscFuncs.ahk
-#Include, MoveResizeWindow.ahk
+; #Include, MoveResizeWindow.ahk
 #Include, SynonymLookup.ahk
-
+return
 RWin:: OptionsMenu()
 
 RAlt::F13
+; RAlt::F13
+
+; F2:: ifClip()
+
+
+F1::
+ClipSaved := ClipboardAll       ;save clipboard
+clipboard := ""  ; empty clipboard
+Send, ^c    ; copy the selected file
+ClipWait, 1		; wait for the clipboard to contain data
+if (!ErrorLevel)    ; if NOT ErrorLevel clipwait found data on the clipboard
+{
+If text_selected
+MsgBox, %clipboard%
+}
+Sleep, 100
+clipboard := ClipSaved       ; restore original clipboard
+ClipSaved := ""   ;  free the memory in case the clipboard was very large.
+return
+
+OnClipboardChange:
+if(A_EventInfo=1)
+{
+text_selected := true
+; ToolTip text is selected
+; Sleep 1000
+; ToolTip
+}
+else
+text_selected := false
+return
+
+
+
+; $RButton Up::
+; 	if GetKeyState("LButton","p")
+; 		OptionsMenu()
+; 	else
+; 		Send, {RButton Up}
+; 	return
+
+#if GetKeyState("LButton")
+RButton:: OptionsMenu()
+
 #if GetKeyState("F13")
 	{
-		i:: Up
-		j:: Left
-		k:: Down
-		l:: Right
-		o:: End
-		u:: Home
+		; i:: Up
+		; j:: Left
+		; k:: Down
+		; l:: Right
+		; o:: End
+		; u:: Home
 		h:: ^+Left
 		`;:: ^+Right
 		8:: !+Up
@@ -43,6 +88,7 @@ RAlt::F13
 		F::Explorer_GetPath()
 		return
 	}
+
 
 
 ~LButton:: dragMoveWindow()

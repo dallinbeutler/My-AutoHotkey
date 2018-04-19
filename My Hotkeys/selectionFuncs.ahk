@@ -38,6 +38,23 @@ Clip(Text="", Reselect="") ; http://www.autohotkey.com/forum/viewtopic.php?p=467
 	Return Clip()
 }
 
+ifClip(){
+	ClipSaved := ClipboardAll       ;save clipboard
+	clipboard := ""  ; empty clipboard
+	Send, ^c    ; copy the selected file
+	ClipWait, 1		; wait for the clipboard to contain data
+	if (!ErrorLevel)    ; if NOT ErrorLevel clipwait found data on the clipboard
+	{
+	If text_selected
+	MsgBox, %clipboard%
+	}
+	Sleep, 100
+	return
+}
+
+
+
+
 SurroundSelection(char1, char2)
 {
 	
