@@ -19,20 +19,35 @@ RAlt::F13
 ; F2:: ifClip()
 
 
-F1::
+
+F1:: 
+	foo := HasSelection()
+	; foo := "forget"
+	if (foo)
+	{
+		MsgBox, %foo% 		
+	}
+	{
+		MsgBox, issues!
+	}
+	return
+HasSelection(){
+local selected := false
 ClipSaved := ClipboardAll       ;save clipboard
 clipboard := ""  ; empty clipboard
 Send, ^c    ; copy the selected file
 ClipWait, 1		; wait for the clipboard to contain data
 if (!ErrorLevel)    ; if NOT ErrorLevel clipwait found data on the clipboard
 {
-If text_selected
-MsgBox, %clipboard%
+	If text_selected
+		selected = %clipboard%
 }
+else
+	selected := false
 Sleep, 100
 clipboard := ClipSaved       ; restore original clipboard
 ClipSaved := ""   ;  free the memory in case the clipboard was very large.
-return
+return selected
 
 OnClipboardChange:
 if(A_EventInfo=1)
@@ -46,6 +61,8 @@ else
 text_selected := false
 return
 
+
+}
 
 
 ; $RButton Up::
