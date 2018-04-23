@@ -78,36 +78,48 @@ Return
 }
 
 ;Broken :(
-	global searchtags
+;	global searchtags
 	
 Google2(selectedText){
-	 
-	Gui googGui:Default
+	; global static vsearchtags
+	; global static vselectedText
+	; global static vSite
+	local  vTags, vText, vSite
 
-	Gui, Add, Text,, Extra Tags:
-	Gui, Add, Edit, tbsearchtags, %searchtags% ; ym  ; , %searchtag% ym  ; The ym option starts a new column of controls.
-	Gui, Add, Text,, Selected text:
-	Gui, Add, Edit, tbselectedText, %selectedText%
+	Gui googGui:Default
+	Gui, Add, Text,, Site:
+	Gui, Add, Edit,vSite w300, %SearchSite%
+	Gui, Add, Text,ym, Extra Tags:
+	Gui, Add, Edit,vTags w300 , %searchTags%  ; , %searchtag% ym  ; The ym option starts a new column of controls.
+	Gui, Add, Text,ym, Selected text:
+	Gui, Add, Edit,vTextb w300, %selectedText%
 	;Gui, Add, Button, +Default, OK ; The label ButtonOK (if it exists) will be run when the button is pressed.
 	Gui, Add, Button, default, OK
-
-	Gui, Show,, Simple Input Example
+	GuiControl, Focus, Textb
+	Gui, Show,, Extended Internet Search
 	return  ; End of auto-execute section. The script is idle until the user does something.
 
 	GoogGuiClose:
 	GoogGuiButtonOK:
 	Gui, Submit  ; Save the input from the user to each control's associated variable.
-	searchtags = %tbsearchtags%
+	SearchTags = %Tags%
+	SearchSite = %Site%
 	;wholeSelection := RegExReplace(clip(),FirstName, LastName)
 	;clip(wholeSelection)
 	
-	Run, http://www.google.com/search?q= %tbselectedText%%selectedText%
+	Run, http://%SearchSite%/search?q=%SearchTags% %Textb%
 
 	Gui, Destroy
 	return
 	
 }
+; Gui, Add, Edit, x82 y150 w230 h70 , Edit
+; Generated using SmartGUI Creator 4.0
+; Gui, Show, x329 y205 h379 w479, New GUI Window
+; Return
 
+; GuiClose:
+; ExitApp
 
 ; Example: A simple input-box that takes a find and replaces
 findReplace(){

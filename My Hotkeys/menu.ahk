@@ -24,10 +24,8 @@ else{
     ; Menu, MainMenu, Add, Item2, MainMenu_Item2
 }
 
- Menu, MainMenu, Show
-
-return
-ControlFocus, MainMenu, menuGoogle, MainMenu
+; return
+; ControlFocus, MainMenu, menuGoogle, MainMenu
 return
 MainMenu_Item1:
     Run, notepad.exe

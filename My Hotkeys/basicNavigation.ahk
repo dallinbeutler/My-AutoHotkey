@@ -1,4 +1,6 @@
 #SingleInstance, Force
+; #Persistent
+RAlt::F13
 #if GetKeyState("F13")
 {
     i:: Up

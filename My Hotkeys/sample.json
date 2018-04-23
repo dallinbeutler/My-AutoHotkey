@@ -1,0 +1,10 @@
+{
+	"username": "CaptainCode",
+	"languages": {
+		"java": "Yes",
+		"csharp": "Yes",
+		"cobol": "Seriously?",
+		"others": ["AHK (obviously)", "PHP", "JavaScript", "VBA", "A little C/C++", "Enough Python to be dangerous"]
+	},
+	"spicehead": "Totally!"
+}

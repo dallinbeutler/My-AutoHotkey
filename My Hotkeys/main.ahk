@@ -1,8 +1,19 @@
-﻿SetNumlockState, AlwaysOn
+﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#SingleInstance, force
+SetNumlockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
-Run basicNavigation.ahk
 
+; #Warn  ; Enable warnings to assist with detecting common errors.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+
+global SearchSite = "www.Github.com"
+global SearchTags = "bats"
+
+Run, basicNavigation.ahk
+; No more global things can be claimed after this, because there is a return 
+; statement 
 #Include, menu.ahk
 #Include, WinExplorerFuncs.ahk
 #Include, selectionFuncs.ahk
@@ -11,9 +22,10 @@ Run basicNavigation.ahk
 ; #Include, MoveResizeWindow.ahk
 #Include, SynonymLookup.ahk
 return
-RWin:: OptionsMenu()
-
-RAlt::F13
+RWin::  
+	OptionsMenu()
+	Menu, MainMenu, Show ; OptionsMenu()
+	return
 ; RAlt::F13
 
 ; F2:: ifClip()
@@ -73,8 +85,10 @@ return
 ; 	return
 
 #if GetKeyState("LButton")
-RButton:: OptionsMenu()
-
+RButton::  
+	OptionsMenu()
+	Menu, MainMenu, Show ; OptionsMenu()
+	return
 #if GetKeyState("F13")
 	{
 		; i:: Up
