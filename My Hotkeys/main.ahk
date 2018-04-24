@@ -156,7 +156,9 @@ WheelDown::Send {Volume_Down}
 	:*:flipz::(╯°□°)╯︵ ┻━┻
 	:*:tablez::┬─┬﻿ ノ( ゜-゜ノ)
 	:*:flipmanz::(╯°Д°）╯︵ /(.□ . \)
-  
+	:*:googlez::
+		Google2("")
+		return
 
 	 
 Pause::
