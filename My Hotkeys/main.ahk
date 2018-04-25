@@ -10,6 +10,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 global SearchSite = "www.Github.com"
 global SearchTags = "bats"
+global text_selected := false
 
 Run, basicNavigation.ahk
 ; No more global things can be claimed after this, because there is a return 
@@ -30,51 +31,40 @@ RWin::
 
 ; F2:: ifClip()
 
+ LAlt & LButton:: dragMoveWindow()
 
 
 F1:: 
-	foo := HasSelection()
+	foo := IfSelection() ; HasSelection()
 	; foo := "forget"
 	if (foo)
 	{
 		MsgBox, %foo% 		
 	}
+	else
 	{
 		MsgBox, issues!
 	}
 	return
-HasSelection(){
-local selected := false
-ClipSaved := ClipboardAll       ;save clipboard
-clipboard := ""  ; empty clipboard
-Send, ^c    ; copy the selected file
-ClipWait, 1		; wait for the clipboard to contain data
-if (!ErrorLevel)    ; if NOT ErrorLevel clipwait found data on the clipboard
-{
-	If text_selected
-		selected = %clipboard%
-}
-else
-	selected := false
-Sleep, 100
-clipboard := ClipSaved       ; restore original clipboard
-ClipSaved := ""   ;  free the memory in case the clipboard was very large.
-return selected
 
-OnClipboardChange:
-if(A_EventInfo=1)
-{
-text_selected := true
-; ToolTip text is selected
-; Sleep 1000
-; ToolTip
-}
-else
-text_selected := false
-return
-
-
-}
+; HasSelection(){
+; 	local selected := false
+; 	ClipSaved := ClipboardAll       ;save clipboard
+; 	clipboard := ""  ; empty clipboard
+; 	Send, ^c    ; copy the selected file
+; 	ClipWait, 1		; wait for the clipboard to contain data
+; 	if (!ErrorLevel)    ; if NOT ErrorLevel clipwait found data on the clipboard
+; 	{
+; 		If text_selected
+; 			selected = %clipboard%
+; 	}
+; 	else
+; 		selected := false
+; 	Sleep, 100
+; 	clipboard := ClipSaved       ; restore original clipboard
+; 	ClipSaved := ""   ;  free the memory in case the clipboard was very large.
+; 	return selected
+; }
 
 
 ; $RButton Up::
@@ -89,40 +79,41 @@ RButton::
 	OptionsMenu()
 	Menu, MainMenu, Show ; OptionsMenu()
 	return
-#if GetKeyState("F13")
-	{
-		; i:: Up
-		; j:: Left
-		; k:: Down
-		; l:: Right
-		; o:: End
-		; u:: Home
-		h:: ^+Left
-		`;:: ^+Right
-		8:: !+Up
-		,:: !+Down
-		\:: Delete
-		r:: findReplace()
-		g:: Google1()
-		+g:: Google2(clip())
-		
-	CapsLock:: Capitalize()
-		":: SurroundSelection("""","""")
-		':: SurroundSelection("'","'")
-		[:: SurroundSelection("[","]")
-		]:: SurroundSelection("[","]")
-		{:: SurroundSelection("{","}")
-		}:: SurroundSelection("{","}")
-		(:: SurroundSelection("(",")")
-		):: SurroundSelection("(",")")
-		P:: SurroundSelection("System.Console.WriteLine(",");")
-		F::Explorer_GetPath()
-		return
-	}
+	
+	
+#if GetKeyState("F13")	
 
+; i:: Up
+; j:: Left
+; k:: Down
+; l:: Right
+; o:: End
+; u:: Home
+; h:: ^+Left
+; `;:: ^+Right
+; 8:: !+Up
+; ,:: !+Down
+; \:: Delete
+r:: findReplace()
+g:: Google1()
+; F::Explorer_GetPath()
+; return
 
+; ; currently always evaluating also, currently not a problem
+; #if GetKeyState("F13") and text_selected
++g:: Google2(clip())
 
-~LButton:: dragMoveWindow()
+CapsLock:: Capitalize()
+":: SurroundSelection("""","""")
+':: SurroundSelection("'","'")
+[:: SurroundSelection("[","]")
+]:: SurroundSelection("[","]")
+{:: SurroundSelection("{","}")
+}:: SurroundSelection("{","}")
+(:: SurroundSelection("(",")")
+):: SurroundSelection("(",")")
+P:: SurroundSelection("System.Console.WriteLine(",");")	
+
 
 #If MouseIsOver("ahk_class Shell_TrayWnd")
 WheelUp::Send {Volume_Up}

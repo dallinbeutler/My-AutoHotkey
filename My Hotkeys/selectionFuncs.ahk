@@ -72,20 +72,48 @@ CutClip(Text="", Reselect="") ; http://www.autohotkey.com/forum/viewtopic.php?p=
 	Return
 }
 
-ifClip(){
+IfSelection(){
 	ClipSaved := ClipboardAll       ;save clipboard
 	clipboard := ""  ; empty clipboard
 	Send, ^c    ; copy the selected file
-	ClipWait, 1		; wait for the clipboard to contain data
+	ClipWait, 10		; wait for the clipboard to contain data
 	if (!ErrorLevel)    ; if NOT ErrorLevel clipwait found data on the clipboard
 	{
-	If text_selected
-	MsgBox, %clipboard%
+
+		; MsgBox, % text_selected ? "true" : "false"
+		If (text_selected){
+			clipOut := clipboard
+			; MsgBox, %clipboard%
+			clipboard := ClipSaved
+			clipwait, 1
+			return clipOut
+		}
+		; MsgBox, no error error
+		return false
+	}
+	else
+	{
+			; MsgBox, Error level
+		
+		clipboard = ClipSaved
+		clipwait 1
+		return false
 	}
 	Sleep, 100
 	return
 }
 
+	OnClipboardChange:
+		if (A_EventInfo=1)
+		{
+			text_selected := true
+			; ToolTip text is selected
+			; Sleep 1000
+			; ToolTip
+		}
+		else
+			text_selected := false
+		return
 
 
 

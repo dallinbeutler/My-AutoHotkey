@@ -112,6 +112,7 @@ dragMoveWindow(){
 	WinGet, EWD_WinState, MinMax, ahk_id %EWD_MouseWin% 
 	if EWD_WinState = 0  ; Only if the window isn't maximized
 		SetTimer, EWD_WatchMouse, 10 ; Track the mouse as the user drags it.
+		ToolTip, draggin
 	return
 
 	EWD_WatchMouse:
@@ -119,6 +120,7 @@ dragMoveWindow(){
 	if EWD_LButtonState = U  ; Button has been released, so drag is complete.
 	{
 		SetTimer, EWD_WatchMouse, Off
+		ToolTip
 		return
 	}
 	GetKeyState, EWD_EscapeState, Escape, P
@@ -126,6 +128,7 @@ dragMoveWindow(){
 	{
 		SetTimer, EWD_WatchMouse, Off
 		WinMove, ahk_id %EWD_MouseWin%,, %EWD_OriginalPosX%, %EWD_OriginalPosY%
+		ToolTip		
 		return
 	}
 	; Otherwise, reposition the window to match the change in mouse coordinates
