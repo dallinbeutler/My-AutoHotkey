@@ -138,6 +138,8 @@ WheelDown::Send {Volume_Down}
 	
 	:*:emailz::dallinbeutler@gmail.com
 	:*:namez::Dallin{space}Beutler
+	:*:tmz::™
+	:*:Nazis::࿖
 	:*:pz::public
 	:*:printz::System.Console.WriteLine("
 	:*:getz:: 

@@ -33,9 +33,14 @@ if WinActive("ahk_class CabinetWClass"){
 else{
     Menu, MainMenu, Add
     Menu, MainMenu, deleteAll
-    Menu, MainMenu, Add, Google, menuGoogle
-    Menu, MainMenu, Add, Google with prefix, menuGoogle2      
+    Menu, WebMenu, Add, Google, menuGoogle
+    Menu, WebMenu, Add, Google with prefix, menuGoogle2
+    Menu, WebMenu, Add, Regex Tester, RegexTester      
+    Menu, MainMenu, Add, Web, :WebMenu
+
+
     Menu, MainMenu, Add, Find Replace, findReplace
+    
     Menu, AppMenu, Add, Calculator, menuCalculator
     Menu, MainMenu, Add, Apps, :AppMenu
     ; Menu, MainMenu, Add, Item1, MainMenu_Item1
@@ -44,8 +49,12 @@ else{
     {
     }
 }
-
 return
+
+RegexTester:
+    Run, https://regex101.com/
+    return
+
 adocumentsdir:     
     Run, %A_MyDocuments%
     return
