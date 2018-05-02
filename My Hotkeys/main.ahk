@@ -94,6 +94,12 @@ RButton::
 ; 8:: !+Up
 ; ,:: !+Down
 ; \:: Delete
+RShift::
+	SendInput, {LControl Down}Tab
+	KeyWait, RShift
+	SendInput, {LControl Down}
+	return
+
 r:: findReplace()
 g:: Google1()
 ; F::Explorer_GetPath()

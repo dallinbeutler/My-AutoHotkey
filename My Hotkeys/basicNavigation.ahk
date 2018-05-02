@@ -10,8 +10,13 @@ RAlt::F13
     o:: End
     u:: Home
 
-    h:: ^+Left
-    `;:: ^+Right
+    h:: ^Left
+    `;:: ^Right
+
+    c:: ^c
+    x:: ^x
+    v:: ^v
+
     8:: !+Up
     ,:: !+Down
     \:: Delete
