@@ -210,3 +210,33 @@ findReplace(){
 	Gui, Destroy
 	return
 }
+
+
+specialCutCopy(isCut){
+	if (isCut){
+		send, ^x
+	}
+	else{
+		send, ^c
+	}
+	ClipMemory[ClipIt] = clipboard
+	ClipIt += 1
+
+	if(ClipIt > 9){
+		ClipIt := 0
+	}
+	
+}
+
+specialPaste(){
+	Gui spPaste: Default
+
+	Gui,Add, Text, ,What is Love %ClipIt%
+
+	for Iterator, element in ClipMemory
+	{
+		Gui,Add, Text,, element
+	}
+	Gui, Show, , Paste Menu
+	return
+}

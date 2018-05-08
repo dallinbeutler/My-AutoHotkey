@@ -1,12 +1,4 @@
 
-MouseIsOver(WinTitle) {
-    MouseGetPos,,, Win
-    return WinExist(WinTitle . " ahk_id " . Win)
-} 
-
-
-
-
 ;=============== Other's window dragging operations ==========================================
 
 #SingleInstance, Force

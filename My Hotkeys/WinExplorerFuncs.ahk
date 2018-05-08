@@ -1,9 +1,5 @@
 ; Gets gets folder path, then opens cmd there
 openCMDinFolder(){
-    ; ClipSaved := ClipboardAll
-    ; Send !d
-    ; Sleep 10
-    ; Send ^c
     path = getFilePath()
     Run, cmd /K "cd `"%path%`""
     return
@@ -15,42 +11,12 @@ getFilePath(){
 }
 
 
-;=============== Other's Win Explorer Operations ==============================================
+#IfWinActive ahk_class CabinetWClass ; for use in explorer.
+F12::openCMDinFolder()
++F12:: Run, powershell -Command "Start-Process PowerShell  -Verb RunAs" 
 
-/*
-	Library for getting info from a specific explorer window (if window handle not specified, the currently active
-	window will be used).  Requires AHK_L or similar.  Works with the desktop.  Does not currently work with save
-	dialogs and such.
-	
-	
-	Explorer_GetSelected(hwnd="")   - paths of target window's selected items
-	Explorer_GetAll(hwnd="")        - paths of all items in the target window's folder
-	Explorer_GetPath(hwnd="")       - path of target window's folder
-	
-	example:
-		F1::
-			path := Explorer_GetPath()
-			all := Explorer_GetAll()
-			sel := Explorer_GetSelected()
-			MsgBox % path
-			MsgBox % all
-			MsgBox % sel
-		return
-	
-	Joshua A. Kinnison
-	2011-04-27, 16:12
-*/
-;F1::
-	;path := Explorer_GetPath()
-	;all := Explorer_GetAll()
-	;sel := Explorer_GetSelected()
-	;MsgBox % path
-	;MsgBox % all
-	;MsgBox % sel
-return
-
-
-
+F1:: Clipboard := Explorer_GetSelected()
+#IfWinActive
 
 Explorer_GetPath(hwnd="")
 {
