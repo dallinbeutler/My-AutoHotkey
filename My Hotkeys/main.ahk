@@ -80,7 +80,7 @@ P:: SurroundSelection("System.Console.WriteLine(",");")
 
 x:: specialCutCopy(True)
 c:: specialCutCopy(False)
-v:: specialPaste()
+;v:: specialPaste()
 
 #If MouseIsOver("ahk_class Shell_TrayWnd")
 WheelUp::Send {Volume_Up}
